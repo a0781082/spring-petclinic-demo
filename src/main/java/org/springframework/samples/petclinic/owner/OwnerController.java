@@ -29,6 +29,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.validation.Valid;
 import java.util.Collection;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * @author Juergen Hoeller
@@ -142,4 +143,14 @@ class OwnerController {
 		return mav;
 	}
 
+	/**
+	 * Counts the number of dogs belonging to the given owner.
+	 * @param owner The owner
+	 * @return The number of pets of type "Dog" belonging to the given owner
+	 */
+	public long countDogs(Owner owner) {
+        return owner.getPets().stream()
+            .filter(pet -> pet.getName().equals("Dog"))
+            .collect(Collectors.counting());
+	}
 }
