@@ -79,31 +79,16 @@ class OwnerController {
 		return "owners/findOwners";
 	}
 
+	/**
+	 * Process /owners/find.
+	 *
+	 * Look up the owner in the database by the given last name.
+	 * If a single owner is found, redirect to /owners/{ownerId}.
+	 * If several owners are found, allow selection of an owner in owners/ownersList.
+	 */
 	@GetMapping("/owners")
 	public String processFindForm(Owner owner, BindingResult result, Map<String, Object> model) {
 
-		// allow parameterless GET request for /owners to return all records
-		if (owner.getLastName() == null) {
-			owner.setLastName(""); // empty string signifies broadest possible search
-		}
-
-		// find owners by last name
-		Collection<Owner> results = this.owners.findByLastName(owner.getLastName());
-		if (results.isEmpty()) {
-			// no owners found
-			result.rejectValue("lastName", "notFound", "not found");
-			return "owners/findOwners";
-		}
-		else if (results.size() == 1) {
-			// 1 owner found
-			owner = results.iterator().next();
-			return "redirect:/owners/" + owner.getId();
-		}
-		else {
-			// multiple owners found
-			model.put("selections", results);
-			return "owners/ownersList";
-		}
 	}
 
 	@GetMapping("/owners/{ownerId}/edit")
