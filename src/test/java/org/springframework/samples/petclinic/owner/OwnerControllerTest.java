@@ -64,7 +64,7 @@ public class OwnerControllerTest {
 		petSet.add(pet);
 		Owner owner1 = new Owner();
 		owner1.setPetsInternal(petSet);
-		assertEquals(0L, this.ownerController.countDogs(owner1));
+		assertEquals(1L, this.ownerController.countDogs(owner1));
 	}
 
 	@Test
@@ -112,7 +112,7 @@ public class OwnerControllerTest {
 		petSet.add(pet1);
 		Owner owner2 = new Owner();
 		owner2.setPetsInternal(petSet);
-		assertEquals(0L, this.ownerController.countDogs(owner2));
+		assertEquals(2L, this.ownerController.countDogs(owner2));
 	}
 }
 
