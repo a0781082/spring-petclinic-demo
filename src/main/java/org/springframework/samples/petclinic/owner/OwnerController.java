@@ -149,8 +149,8 @@ class OwnerController {
 	 * @return The number of pets of type "Dog" belonging to the given owner
 	 */
 	public long countDogs(Owner owner) {
-        return owner.getPets().stream()
-            .filter(pet -> pet.getName().equals("Dog"))
-            .collect(Collectors.counting());
+            return owner.getPets().stream()
+                .filter(pet -> pet.getType().getName().equals("Dog"))
+                .collect(Collectors.counting());
 	}
 }
