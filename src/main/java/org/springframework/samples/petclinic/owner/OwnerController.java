@@ -83,6 +83,7 @@ class OwnerController {
 	 * Process /owners/find.
 	 *
 	 * Look up the owner in the database by the given last name.
+	 * If no owner is found, send back to owners/findOwners.
 	 * If a single owner is found, redirect to /owners/{ownerId}.
 	 * If several owners are found, allow selection of an owner in owners/ownersList.
 	 */

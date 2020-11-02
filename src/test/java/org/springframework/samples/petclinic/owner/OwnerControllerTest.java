@@ -39,6 +39,18 @@ public class OwnerControllerTest {
 	private VisitRepository visitRepository;
 
 	@Test
+	public void testProcessFindForm_notFound() throws Exception {
+		when(this.ownerRepository.findByLastName(or(isA(String.class), isNull())))
+			.thenReturn(new ArrayList<Owner>());
+
+		MockHttpServletRequestBuilder param0 = MockMvcRequestBuilders.get("/owners");
+		ResultActions actualPerformResult = this.mockMvc.perform(param0);
+		ResultActions resultActions = actualPerformResult
+			.andExpect(MockMvcResultMatchers.status().isOk());
+		resultActions.andExpect(MockMvcResultMatchers.view().name("owners/findOwners"));
+	}
+
+	@Test
 	public void testProcessFindForm_singleOwner() throws Exception {
 		Owner owner = new Owner();
 		owner.setLastName("Doe");
