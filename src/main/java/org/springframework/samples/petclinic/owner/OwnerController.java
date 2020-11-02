@@ -86,6 +86,7 @@ class OwnerController {
 	 * If no owner is found, send back to owners/findOwners.
 	 * If a single owner is found, redirect to /owners/{ownerId}.
 	 * If several owners are found, allow selection of an owner in owners/ownersList.
+	 * If no last name is given, allow selection among all owners.
 	 */
 	@GetMapping("/owners")
 	public String processFindForm(Owner owner, BindingResult result, Map<String, Object> model) {

@@ -51,6 +51,23 @@ public class OwnerControllerTest {
 	}
 
 	@Test
+	public void testProcessFindForm_noLastNameGiven() throws Exception {
+		Owner owner = new Owner();
+		owner.setLastName("Doe");
+		owner.setId(1);
+		owner.setCity("Oxford");
+		owner.setAddress("42 Main St");
+		owner.setFirstName("Jane");
+		owner.setTelephone("4105551212");
+		when(this.ownerRepository.findByLastName(or(isA(String.class), isNull())))
+			.thenReturn(Collections.singletonList(owner));
+
+		this.mockMvc.perform(get("/owners"))
+			.andExpect(status().is3xxRedirection())
+			.andExpect(view().name("redirect:/owners/1"));
+	}
+
+	@Test
 	public void testProcessFindForm_singleOwner() throws Exception {
 		Owner owner = new Owner();
 		owner.setLastName("Doe");
