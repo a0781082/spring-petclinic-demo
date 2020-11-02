@@ -90,7 +90,10 @@ class OwnerController {
 	@GetMapping("/owners")
 	public String processFindForm(Owner owner, BindingResult result, Map<String, Object> model) {
 		Collection<Owner> results = this.owners.findByLastName(owner.getLastName());
-		if (results.size() == 1) {
+		if (results.isEmpty()) {
+			result.rejectValue("lastName", "notFound", "not found");
+			return "owners/findOwners";
+		} else if (results.size() == 1) {
 			owner = results.iterator().next();
 			return "redirect:/owners/" + owner.getId();
 		} else {
